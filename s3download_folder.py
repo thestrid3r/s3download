@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 '''
-Suppose you have a s3 bucket named bucketname
+Suppose you have a s3 bucket named bucketname,
 and have a folder inside that bucket named dir_name.
-The list of files are either in your csv/text file.
-Tweak it according to your  need.
+The list of files are in your csv/text file,tweak it according to your  need.
 
 '''
 import logging
@@ -15,12 +14,9 @@ AWS_SECRET = ''
 aws_connection = S3Connection( AWS_KEY, AWS_SECRET )
 bucket = aws_connection.get_bucket( "bucketname" )
 '''
-use this if you only want to download files from directory called dir_name
-for multiple folders , give name seprated by comma.
- bucket.list() - for downloading from root directory
- bucket.list("dir_name", "/")
+use this if you want to download files from a folder inside your root bucket..
 '''
-for key in bucket.list("dir_name"):
+for key in bucket.list("dir_name/"):
     with open( "s3down.txt", "r" ) as f:
         lines = [line.rstrip( '\n' ) for line in open( 's3down.txt' )]
         for elem in lines:
